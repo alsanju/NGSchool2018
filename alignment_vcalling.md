@@ -12,7 +12,7 @@
 Open your terminal, and go to your working directory, 
 
 ```
-cd ~/Course_Materials/nanopore_practical/wd
+cd /path/to/wd
 ```
 and create the following directory structure:
 
@@ -24,9 +24,8 @@ mkdir variant_calling
 
 ## FASTQ
 
-The data we will be using is from [NA12878](http://github.com/nanopore-wgs-consortium/NA12878/blob/master/Genome.md) human genome reference standard on the Oxford Nanopore MinION using 1D ligation kits (450 bp/s) using R9.4 chemistry (FLO-MIN106).
-
-We have already prepared a subset of specific regions of NA12878 genome in a FASTQ file. [FASTQ](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2847217) format is a text-based format for storing both a biological sequence and its corresponding quality scores.
+The data we will be using is a subset of specific regions of chromosome X in a FASTQ format. 
+[FASTQ](http://www.ncbi.nlm.nih.gov/pmc/articles/PMC2847217) format is a text-based format for storing both a biological sequence and its corresponding quality scores.
 
 <img src="//raw.githubusercontent.com/alsanju/train_malta_nanopore/master/images/fastq.png" alt="img_1" class="inline"/>
 
@@ -39,13 +38,13 @@ A FASTQ file normally uses four lines per sequence:
 You can visualize the FASTQ file typing:
 
 ```
-less ../data/fastq/NA12878.ROI.fastq
+less chrX.ROI.fastq
 ```
 
 How many reads do we have?
 
 ```
-awk '{s++}END{print s/4}' ../data/fastq/NA12878.ROI.fastq
+awk '{s++}END{print s/4}' chrX.ROI.fastq
 ```
 
 ## Reads QC
@@ -53,7 +52,7 @@ awk '{s++}END{print s/4}' ../data/fastq/NA12878.ROI.fastq
 First we will get the read length for each read:
 
 ```
-awk '{if(NR%4==2) print length($1)}' ../data/fastq/NA12878.ROI.fastq > stats/read_length.txt
+awk '{if(NR%4==2) print length($1)}' chrX.ROI.fastq > stats/read_length.txt
 ```
 
 And look at the read length distribution. For that, you can start R from the command-line:
@@ -67,7 +66,6 @@ and then, type the following:
 ```
 library(ggplot2)
 readLength <- read.table("stats/read_length.txt", header=FALSE, col.names = "length")
-head(readLength)
 ggplot(data=readLength, aes(length)) + geom_histogram()
 ```
 
@@ -94,29 +92,34 @@ Multiple algorithms have been developed to align long reads to a genome of refer
 -	NGMLR: [http://github.com/philres/ngmlr](http://github.com/philres/ngmlr)
 -	minimap2: [http://github.com/lh3/minimap2](http://github.com/lh3/minimap2)
 
-Here we will use NGMLR. First we will map the reads to the genome of reference (GRCh37), and convert the SAM output to BAM format.
+Here we will use NGMLR. First we will map the reads to the genome of reference (GRCh37)
 
 ```
-ngmlr -r ~/Course_Materials/human_g1k_v37.fasta.gz -q ../data/fastq/NA12878.ROI.fastq -o alignment/NA12878.ROI.sam
-samtools view alignment/NA12878.ROI.sam -O BAM -o alignment/NA12878.ROI.bam
+ngmlr -r ~/Course_Materials/human_g1k_v37.fasta.gz -q chrX.ROI.fastq -o alignment/chrX.ROI.sam
+```
+
+and convert the SAM output to BAM format.
+
+```
+samtools view alignment/chrX.ROI.sam -O BAM -o alignment/chrX.ROI.bam
 ```
 
 Then, we will sort it by mapping coordinate and save it as BAM.
 
 ```
-samtools sort alignment/NA12878.ROI.bam > alignment/NA12878.ROI.sort.bam
+samtools sort alignment/chrX.ROI.bam > alignment/chrX.ROI.sort.bam
 ```
 
 Finally we will index the BAM file to run samtools subtools later.
 
 ```
-samtools index alignment/NA12878.ROI.sort.bam
+samtools index alignment/chrX.ROI.sort.bam
 ```
 
 To visualise the BAM file:
 
 ```
-samtools view alignment/NA12878.ROI.sort.bam | less -S
+samtools view alignment/chrX.ROI.sort.bam | less -S
 ```
 
 ## Alignment QC
@@ -124,7 +127,7 @@ samtools view alignment/NA12878.ROI.sort.bam | less -S
 As a first QC, we can run samtools stats:
 
 ```
-samtools stats alignment/NA12878.ROI.sort.bam > stats/stats.txt
+samtools stats alignment/chrX.ROI.sort.bam > stats/stats.txt
 head -n40 stats/stats.txt
 ```
 
@@ -134,7 +137,7 @@ head -n40 stats/stats.txt
 Now we will get the coverage per base using samtools depth.
 
 ```
-samtools depth alignment/NA12878.ROI.sort.bam > stats/coverage.txt
+samtools depth alignment/chrX.ROI.sort.bam > stats/coverage.txt
 ```
 
 And look at the coverage distribution in R. For that, you can start R from the command-line:
@@ -164,9 +167,6 @@ You can also add a vertical line to the previous plot intercepting the median co
 p + geom_vline(xintercept=median(coverage$cov), colour = "red")
 ```
 
-However, this is a very specific subset, and is not a representation of the coverage of NA12878’s genome. If you want to compare this with the coverage distribution across the whole genome, you can do the same steps but for the [NA12878](http://github.com/nanopore-wgs-consortium/NA12878/blob/master/Genome.md).
-
-
 ## Variant calling
 
 Variants are called and stored in [VCF](http://samtools.github.io/hts-specs/VCFv4.2.pdf) format. This contains a header, and then data lines each containing information about a position in the genome.
@@ -180,23 +180,25 @@ Currently, there are different algorithms for calling SVs from long-read sequenc
 Since we used NGMLR for the alignment, now we will use sniffles for calling structural variants.
 
 ```
-sniffles -m alignment/NA12878.ROI.sort.bam -v variant_calling/NA12878.ROI.vcf
+sniffles -m alignment/chrX.ROI.sort.bam -v variant_calling/chrX.ROI.vcf
 ```
 
-If you want to look at high quality SVs, you can change the -s parameter to 20, where s is the minimum number of reads that support a SV (by default is 10).
+How many SVs have been called?:
 
 ```
-sniffles -m alignment/NA12878.ROI.sort.bam -v variant_calling/NA12878.ROI.s20.vcf -s 20
+bcftools view -H variant_calling/chrX.ROI.vcf | wc -l
+```
+
+The -s parameter can be changed to 1, where s is the minimum number of reads that support a SV (by default is 10).
+
+```
+sniffles -m alignment/chrX.ROI.sort.bam -v variant_calling/chrX.ROI.s1.vcf -s 1
 ```
 
 The information that is provided in sniffles’s output can be found in:
 [http://github.com/fritzsedlazeck/Sniffles/wiki/Output](http://github.com/fritzsedlazeck/Sniffles/wiki/Output)
 
-To know how many SVs have been called, we will run:
 
-```
-bcftools view -H variant_calling/NA12878.ROI.vcf | wc -l
-```
 
 Finally, you can convert the VCF to a tab format:
 
@@ -205,7 +207,3 @@ Finally, you can convert the VCF to a tab format:
 ```
 
 and inspect the deletions in IGV.
-
--	How many deletions are real?
--	How many SVs breakpoint junctions are within repetitive sequences?
-     - For that, you would need to load Repeatmasker from server (File > Load from server > Annotations > Variation and Repeats > Repeat Masker)
