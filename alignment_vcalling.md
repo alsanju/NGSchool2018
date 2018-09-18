@@ -38,13 +38,13 @@ A FASTQ file normally uses four lines per sequence:
 You can visualize the FASTQ file typing:
 
 ```
-less chrX.ROI.fastq
+less data/fastq/chrX.ROI.fastq
 ```
 
 How many reads do we have?
 
 ```
-awk '{s++}END{print s/4}' chrX.ROI.fastq
+awk '{s++}END{print s/4}' data/fastq/chrX.ROI.fastq
 ```
 
 ## Reads QC
@@ -52,7 +52,7 @@ awk '{s++}END{print s/4}' chrX.ROI.fastq
 First we will get the read length for each read:
 
 ```
-awk '{if(NR%4==2) print length($1)}' chrX.ROI.fastq > stats/read_length.txt
+awk '{if(NR%4==2) print length($1)}' data/fastq/chrX.ROI.fastq > stats/read_length.txt
 ```
 
 And look at the read length distribution. For that, you can start R from the command-line:
@@ -95,7 +95,7 @@ Multiple algorithms have been developed to align long reads to a genome of refer
 Here we will use NGMLR. First we will map the reads to the genome of reference (GRCh37)
 
 ```
-ngmlr -r ~/Course_Materials/human_g1k_v37.fasta.gz -q chrX.ROI.fastq -o alignment/chrX.ROI.sam
+ngmlr -r ~/Course_Materials/human_g1k_v37.fasta.gz -q data/fastq/chrX.ROI.fastq -o alignment/chrX.ROI.sam
 ```
 
 and convert the SAM output to BAM format.
@@ -128,6 +128,11 @@ As a first QC, we can run samtools stats:
 
 ```
 samtools stats alignment/chrX.ROI.sort.bam > stats/stats.txt
+```
+
+and look at the first 40 lines:
+
+```
 head -n40 stats/stats.txt
 ```
 
