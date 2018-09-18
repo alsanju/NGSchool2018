@@ -14,5 +14,6 @@ Lublin, Poland
  
 # Contents
 
-* [Part 1: Basecalling](http://ngleadall.github.io/train_malta_nanopore)
-* [Part 2: Alignment and variant calling](http://alsanju.github.io/NGSchool2018/alignment_vcalling)
+* [Basecalling](http://ngleadall.github.io/train_malta_nanopore)
+* [Alignment](http://alsanju.github.io/NGSchool2018/alignment)
+* [Variant calling](http://alsanju.github.io/NGSchool2018/variant_calling)
