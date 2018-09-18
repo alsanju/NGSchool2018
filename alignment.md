@@ -5,7 +5,6 @@
 * [Reads QC](#reads-qc)
 * [Alignment](#alignment)
 * [Alignment QC](#alignment-qc)
-* [Variant calling](#vcalling)
 
 ## Working directory
 
