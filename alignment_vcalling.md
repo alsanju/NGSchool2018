@@ -1,7 +1,5 @@
 # NGSchool2018
 
-# Train-Malta Nanopore Workshop - Part 2
-
 * [Working directory](#wd)
 * [FASTQ](#fastq)
 * [Reads QC](#reads-qc)
