@@ -37,13 +37,13 @@ A FASTQ file normally uses four lines per sequence:
 You can visualize the FASTQ file typing:
 
 ```
-less data/fastq/chrX.ROI.fastq
+less data/nanopore/fastq/child.nanopore.ROI.fastq.gz
 ```
 
 How many reads do we have?
 
 ```
-awk '{s++}END{print s/4}' data/fastq/chrX.ROI.fastq
+awk '{s++}END{print s/4}' data/nanopore/fastq/child.nanopore.ROI.fastq.gz
 ```
 
 ## Reads QC
@@ -51,7 +51,7 @@ awk '{s++}END{print s/4}' data/fastq/chrX.ROI.fastq
 First we will get the read length for each read:
 
 ```
-awk '{if(NR%4==2) print length($1)}' data/fastq/chrX.ROI.fastq > stats/read_length.txt
+awk '{if(NR%4==2) print length($1)}' data/nanopore/fastq/child.nanopore.ROI.fastq.gz > stats/read_length.txt
 ```
 
 And look at the read length distribution. For that, you can start R from the command-line:
@@ -94,31 +94,31 @@ Multiple algorithms have been developed to align long reads to a genome of refer
 Here we will use NGMLR. First we will map the reads to the genome of reference (GRCh37)
 
 ```
-ngmlr -r ~/Course_Materials/human_g1k_v37.fasta.gz -q data/fastq/chrX.ROI.fastq -o alignment/chrX.ROI.sam
+ngmlr -r ~/Course_Materials/human_g1k_v37.fasta.gz -q data/nanopore/fastq/child.nanopore.ROI.fastq.gz -o alignment/child.nanopore.ROI.sam
 ```
 
 and convert the SAM output to BAM format.
 
 ```
-samtools view alignment/chrX.ROI.sam -O BAM -o alignment/chrX.ROI.bam
+samtools view alignment/child.nanopore.ROI.sam -O BAM -o alignment/child.nanopore.ROI.bam
 ```
 
 Then, we will sort it by mapping coordinate and save it as BAM.
 
 ```
-samtools sort alignment/chrX.ROI.bam > alignment/chrX.ROI.sort.bam
+samtools sort -o alignment/child.nanopore.ROI.sort.bam alignment/child.nanopore.ROI.bam
 ```
 
 Finally we will index the BAM file to run samtools subtools later.
 
 ```
-samtools index alignment/chrX.ROI.sort.bam
+samtools index alignment/child.nanopore.ROI.sort.bam
 ```
 
 To visualise the BAM file:
 
 ```
-samtools view alignment/chrX.ROI.sort.bam | less -S
+samtools view alignment/child.nanopore.ROI.sort.bam | less -S
 ```
 
 ## Alignment QC
@@ -126,7 +126,7 @@ samtools view alignment/chrX.ROI.sort.bam | less -S
 As a first QC, we can run samtools stats:
 
 ```
-samtools stats alignment/chrX.ROI.sort.bam > stats/stats.txt
+samtools stats alignment/child.nanopore.ROI.sort.bam > stats/stats.txt
 ```
 
 and look at the first 40 lines:
@@ -141,7 +141,7 @@ head -n40 stats/stats.txt
 Now we will get the coverage per base using samtools depth.
 
 ```
-samtools depth alignment/chrX.ROI.sort.bam > stats/coverage.txt
+samtools depth alignment/child.nanopore.ROI.sort.bam > stats/coverage.txt
 ```
 
 And look at the coverage distribution in R. For that, you can start R from the command-line:
