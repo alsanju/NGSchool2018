@@ -4,23 +4,13 @@
 
 ## Short-read WGS
 
-Canonical SVs were called from WGS data. Variant calls.
+Canonical SVs were called from WGS data. Details:
 
-| Structural Variant  | Coordinates           | Variant caller  |
-| ------------- |:-------------:| -----:|
-| Duplication 1      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
-
-X:17792578-18073738
-Canvas
-Inversion
-X:18074005-18532312
-Manta
-Duplication 2
-X:18248826-18532221
-Canvas
+| Structural Variant  | Coordinates         | Variant caller  |
+| ------------------- |:-------------------:| ---------------:|
+| Duplication 1       | X:17792578-18073738 | Canvas          |
+| Inversion           | X:18074005-18532312 | Manta           |
+| Duplication 2       | X:18248826-18532221 | Canvas          |
 
 
 Variants are called and stored in [VCF](http://samtools.github.io/hts-specs/VCFv4.2.pdf) format. This contains a header, and then data lines each containing information about a position in the genome.
