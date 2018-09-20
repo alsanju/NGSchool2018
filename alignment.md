@@ -91,13 +91,17 @@ Multiple algorithms have been developed to align long reads to a genome of refer
 Here we will use NGMLR. First we will map the reads to the genome of reference (GRCh37)
 
 ```
-ngmlr -r /path/to/human_g1k_v37.fasta.gz -q /mnt/albasj/data/nanopore/fastq/child.nanopore.ROI.fastq -o alignment/child.nanopore.ROI.sam
+ngmlr -r /mnt/albasj/data/reference/GRCh37/Homo_sapiens.GRCh37.75.dna.fasta
+ -q /mnt/albasj/data/nanopore/fastq/child.nanopore.ROI.fastq
+ -o alignment/child.nanopore.ROI.sam
 ```
 
 and convert the SAM output to BAM format.
 
 ```
-samtools view alignment/child.nanopore.ROI.sam -O BAM -o alignment/child.nanopore.ROI.bam
+samtools view alignment/child.nanopore.ROI.sam \
+ -O BAM \
+ -o alignment/child.nanopore.ROI.bam
 ```
 
 Then, we will sort it by mapping coordinate and save it as BAM.
@@ -115,7 +119,7 @@ samtools index alignment/child.nanopore.ROI.sort.bam
 To visualise the BAM file:
 
 ```
-samtools view alignment/child.nanopore.ROI.sort.bam | less -S
+samtools view -h alignment/child.nanopore.ROI.sort.bam | less -S
 ```
 
 ## Alignment QC
