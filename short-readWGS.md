@@ -1,7 +1,5 @@
 # NGSchool2018
 
-* [Short-read WGS](#srwgs)
-
 ## Short-read WGS
 
 Canonical SVs were called from WGS data. Details:
