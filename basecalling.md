@@ -163,7 +163,8 @@ and execute the following commands:
 ```sh
 library(ggplot2)
 summary_data <- read.table( "basecalled_reads/sequencing_summary.txt", sep="\t", header=TRUE)
-ggplot(data=summary_data, aes(sequence_length_template)) + geom_histogram()
+ggplot(data=summary_data, aes(sequence_length_template)) + 
+ geom_histogram()
 ```
 
 You can also represent the length template by qscore template:
