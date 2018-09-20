@@ -1,6 +1,4 @@
-# NGSchool2018
-
-## Starting point
+# Starting point
 
 Login to remote server:
 
