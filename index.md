@@ -14,6 +14,7 @@ Lublin, Poland
  
 # Contents
 
+* [Set up](http://alsanju.github.io/NGSchool2018/setup)
 * [Sort-read WGS](http://alsanju.github.io/NGSchool2018/short-readWGS)
 * [Basecalling](http://ngleadall.github.io/train_malta_nanopore)
 * [Alignment](http://alsanju.github.io/NGSchool2018/alignment)
