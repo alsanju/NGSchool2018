@@ -161,6 +161,7 @@ You can also represent the length template by qscore template:
 ggplot(data=summary_data, aes(x=mean_qscore_template, y=sequence_length_template, color=passes_filtering)) +
  geom_point()
 ```
+**Hint**: to quit R, type: ```quit()```
 
 # Final Comment
 This was a **VERY** basic overview of nanopore data analysis. Below is a diagram showing the parts of an overall workflow this tutorial has covered.
