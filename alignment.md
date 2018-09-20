@@ -160,7 +160,7 @@ cov_percent <- data.frame(  "cov" = seq(1,max(coverage$cov))
                           , "percent" = sapply(seq(1,max(coverage$cov)), function(x) nrow(coverage[coverage$cov >= x,])/nrow(coverage)))
 p <- ggplot(cov_percent, aes(x = cov, y = percent)) + 
      geom_line() + 
-     scale_x_continuous(breaks=seq(0,max(coverage$cov), 10)) + 
+     scale_x_continuous(breaks=seq(0,max(coverage$cov), 1)) + 
      xlab("Coverage") + 
      ylab("Percentage of bases")
 p
