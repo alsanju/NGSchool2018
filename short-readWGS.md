@@ -17,9 +17,9 @@ igv&
 And open the following bam files (**Hint**: File > Load from file):
 
 ```
-/mnt/albasj/data/illumina/child.chrX.bam
-/mnt/albasj/data/illumina/father.chrX.bam
-/mnt/albasj/data/illumina/mother.chrX.bam
+/mnt/albasj/data/illumina/child.illumina.chrX.bam
+/mnt/albasj/data/illumina/father.illumina.chrX.bam
+/mnt/albasj/data/illumina/mother.illumina.chrX.bam
 ```
 
 Go to region:
