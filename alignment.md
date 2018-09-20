@@ -11,7 +11,7 @@
 Open your terminal, and go to your working directory, 
 
 ```
-cd /path/to/wd
+cd /mnt/albasj/analysis/username
 ```
 and create the following directory structure:
 
@@ -37,13 +37,13 @@ A FASTQ file normally uses four lines per sequence:
 You can visualize the FASTQ file typing:
 
 ```
-less data/nanopore/fastq/child.nanopore.ROI.fastq.gz
+less -S /mnt/albasj/data/nanopore/fastq/child.nanopore.ROI.fastq
 ```
 
 How many reads do we have?
 
 ```
-awk '{s++}END{print s/4}' data/nanopore/fastq/child.nanopore.ROI.fastq.gz
+awk '{s++}END{print s/4}' /mnt/albasj/data/nanopore/fastq/child.nanopore.ROI.fastq
 ```
 
 ## Reads QC
@@ -51,7 +51,7 @@ awk '{s++}END{print s/4}' data/nanopore/fastq/child.nanopore.ROI.fastq.gz
 First we will get the read length for each read:
 
 ```
-awk '{if(NR%4==2) print length($1)}' data/nanopore/fastq/child.nanopore.ROI.fastq.gz > stats/read_length.txt
+awk '{if(NR%4==2) print length($1)}' /mnt/albasj/data/nanopore/fastq/child.nanopore.ROI.fastq > stats/read_length.txt
 ```
 
 And look at the read length distribution. For that, you can start R from the command-line:
@@ -68,11 +68,8 @@ readLength <- read.table("stats/read_length.txt", header=FALSE, col.names = "len
 ggplot(data=readLength, aes(length)) + geom_histogram()
 ```
 
-For quitting R, just type:
+**Hint**: for quitting R, just type, quit()
 
-```
-quit()
-```
 
 ## Alignment
 
@@ -94,7 +91,7 @@ Multiple algorithms have been developed to align long reads to a genome of refer
 Here we will use NGMLR. First we will map the reads to the genome of reference (GRCh37)
 
 ```
-ngmlr -r ~/Course_Materials/human_g1k_v37.fasta.gz -q data/nanopore/fastq/child.nanopore.ROI.fastq.gz -o alignment/child.nanopore.ROI.sam
+ngmlr -r /path/to/human_g1k_v37.fasta.gz -q /mnt/albasj/data/nanopore/fastq/child.nanopore.ROI.fastq -o alignment/child.nanopore.ROI.sam
 ```
 
 and convert the SAM output to BAM format.
