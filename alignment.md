@@ -99,8 +99,8 @@ ngmlr -r /mnt/albasj/data/reference/GRCh37/Homo_sapiens.GRCh37.75.dna.fasta
 and convert the SAM output to BAM format.
 
 ```
-samtools view alignment/child.nanopore.ROI.sam \
- -O BAM \
+samtools view alignment/child.nanopore.ROI.sam 
+ -O BAM 
  -o alignment/child.nanopore.ROI.bam
 ```
 
