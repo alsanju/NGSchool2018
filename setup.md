@@ -33,7 +33,7 @@ bash
 # check if everything is ok and you see the envs
 conda info -e
 # activate needed env
-source activate nameoftheenvironment
+source activate albasj
 ```
 
 Now, go to the workshop directory:
