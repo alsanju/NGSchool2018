@@ -1,8 +1,9 @@
 # Basecalling
 
-Instructors: 
-Nick Gleadall (ng384@medschl.cam.ac.uk) 
-Alba Sanchis Juan (as2635@medschl.cam.ac.uk)
+## Instructors
+
+ - Nick Gleadall (ng384@medschl.cam.ac.uk)
+ - Alba Sanchis Juan (as2635@medschl.cam.ac.uk)
   
 # 1) Aims
 
@@ -153,7 +154,12 @@ This file can be used to plot basic run statistics as part of QC
 
 It is much easier to view this data in **R**. 
 
-Open **R** (blue icon on the left) and execute the following commands:
+Open **R**:
+```sh
+R
+```
+
+and execute the following commands:
 ```sh
 library(ggplot2)
 summary_data <- read.table( "basecalled_reads/sequencing_summary.txt", sep="\t", header=TRUE)
