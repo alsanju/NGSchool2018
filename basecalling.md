@@ -152,27 +152,21 @@ This file can be used to plot basic run statistics as part of QC
 
 It is much easier to view this data in **R**. 
 
-Open **Rstudio** (blue icon on the left) and load the following script
-```sh 
-~/Desktop/Course_Materials/nanopore_practical/scripts/basic_sequence_qc.r
+Open **R** (blue icon on the left) and execute the following commands:
+```sh
+library(ggplot2)
+summary_data <- read.table( "basecalled_reads/sequencing_summary.txt", sep="\t", header=TRUE)
+ggplot(data=summary_data, aes(sequence_length_template)) + geom_histogram()
+```
+
+You can also represent the length template by qscore template:
+```
+ggplot(data=summary_data, aes(x=mean_qscore_template, y=sequence_length_template, color=passes_filtering)) +
+ geom_point()
 ```
 
 # Final Comment
 This was a **VERY** basic overview of nanopore data analysis. Below is a diagram showing the parts of an overall workflow this tutorial has covered.
 
 <img src="//raw.githubusercontent.com/ngleadall/train_malta_nanopore/master/images/img_6.png" alt="img_6" class="inline"/>
-
-
-
-
-
-  
-  
-  
-  
-  
-  
-  
-
-  
 
