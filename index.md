@@ -16,5 +16,4 @@ Lublin, Poland
 
 * [Set up](http://alsanju.github.io/NGSchool2018/setup)
 * [Sort-read WGS](http://alsanju.github.io/NGSchool2018/short-readWGS)
-* [Long-read WGS](http://alsanju.github.io/NGSchool2018/long-readWGS.md)
-
+* [Long-read WGS](http://alsanju.github.io/NGSchool2018/long-readWGS)
