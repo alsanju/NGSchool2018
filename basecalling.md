@@ -1,6 +1,8 @@
 # Basecalling
 
-Author: Nick Gleadall (ng384@medschl.cam.ac.uk) 
+Instructors: 
+Nick Gleadall (ng384@medschl.cam.ac.uk) 
+Alba Sanchis Juan (as2635@medschl.cam.ac.uk)
   
 # 1) Aims
 
