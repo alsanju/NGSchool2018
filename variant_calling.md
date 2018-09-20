@@ -37,4 +37,24 @@ The information that is provided in sniffles’s output can be found in:
 /mnt/albasj/scripts/vcf2tab.py variant_calling/child.nanopore.ROI.s1.vcf > variant_calling/child.nanopore.ROI.s1.tab
 ```
 
-and inspect the SVs in IGV.
+- Are the variant calls what you were expecting? Why?
+
+Inspect the nanopore alignment in IGV. For that, you will first open IGV:
+
+```
+igv &
+```
+
+and open the nanopore bam file (keeping the ones from illumina sequencing):
+
+```
+/mnt/albasj/analysis/albasj/alignment/child.nanopore.ROI.sort.bam
+```
+
+From the short-read WGS we already suspected that the cxSV was present in the paternal chromosome. To confirm this statement, we will inspect the following SNPs:
+
+chrX:18,073,775
+chrX:18,536,028
+
+Can you now conclude if there is a disrupted and an intact copy of the gene in the same allele? What does this mean?
+
