@@ -1,10 +1,3 @@
----
-layout: default
-title:  NGSchool 2018
----
-
-# {{ page.title }}
-
 Friday 21 September 2018
 Lublin, Poland
 
