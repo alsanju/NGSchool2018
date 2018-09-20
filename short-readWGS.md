@@ -12,41 +12,20 @@ Canonical SVs were called from WGS data. Details:
 | Inversion          | X     | 18074005 | 18532312 | Manta          |
 | Duplication 2      | X     | 18248826 | 18532221 | Canvas         |
 
-
-Variants are called and stored in [VCF](http://samtools.github.io/hts-specs/VCFv4.2.pdf) format. This contains a header, and then data lines each containing information about a position in the genome.
-
-<img src="//raw.githubusercontent.com/alsanju/train_malta_nanopore/master/images/vcf.png" alt="img_3" class="inline"/>
-
-Currently, there are different algorithms for calling SVs from long-read sequencing data, including:
--	[Sniffles](http://github.com/fritzsedlazeck/Sniffles): best used with NGMLR. 
--	[NanoSV](http://github.com/philres/ngmlr): best used with LAST.
-
-Since we used NGMLR for the alignment, now we will use sniffles for calling structural variants.
+To first visualise the short-read sequencing for the child and the two unaffected parents, open in IGV the bam files that are in:
 
 ```
-sniffles -m alignment/child.nanopore.ROI.sort.bam -v variant_calling/child.nanopore.ROI.vcf
+data/illumina/child.chrX.bam
+data/illumina/father.chrX.bam
+data/illumina/mother.chrX.bam
 ```
 
-How many SVs have been called?:
+And go to region:
+chrX:17,699,000-18,653,000	
 
-```
-bcftools view -H variant_calling/child.nanopore.ROI.vcf | wc -l
-```
+If you have problems visualising this region you can change the visibility range threshold to 1000 Kb in View>Preferences>Alignments.
+If you still have problems, go to individual breakpoints and zoom out.
 
-The -s parameter can be changed to 1, where s is the minimum number of reads that support a SV (by default is 10).
+- How is this variant inherited?
+- Can you phase the cxSV from the short reads? Some informative SNPs are chrX:18064030, chrX:18073775, chrX:18504017.
 
-```
-sniffles -m alignment/child.nanopore.ROI.sort.bam -v variant_calling/child.nanopore.ROI.vcf -s 1
-```
-
-The information that is provided in sniffles’s output can be found in:
-[http://github.com/fritzsedlazeck/Sniffles/wiki/Output](http://github.com/fritzsedlazeck/Sniffles/wiki/Output)
-
-
-Finally, you can convert the VCF to a tab format:
-
-```
-scripts/vcf2tab.py variant_calling/child.nanopore.ROI.vcf
-```
-
-and inspect the SVs in IGV.
