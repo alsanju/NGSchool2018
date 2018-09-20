@@ -1,4 +1,4 @@
-# NGSchool2018
+# Contents
 
 * [Working directory](#wd)
 * [FASTQ](#fastq)
