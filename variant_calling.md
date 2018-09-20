@@ -14,26 +14,27 @@ Since we used NGMLR for the alignment, now we will use sniffles for calling stru
 sniffles -m alignment/child.nanopore.ROI.sort.bam -v variant_calling/child.nanopore.ROI.vcf
 ```
 
-How many SVs have been called?:
+To visualise the VCF file:
 
 ```
-bcftools view -H variant_calling/child.nanopore.ROI.vcf | wc -l
+less -S variant_calling/child.nanopore.ROI.vcf
 ```
+
+How many SVs have been called?:
 
 The -s parameter can be changed to 1, where s is the minimum number of reads that support a SV (by default is 10).
 
 ```
-sniffles -m alignment/child.nanopore.ROI.sort.bam -v variant_calling/child.nanopore.ROI.vcf -s 1
+sniffles -m alignment/child.nanopore.ROI.sort.bam -v variant_calling/child.nanopore.ROI.s1.vcf -s 1
 ```
 
 The information that is provided in sniffles’s output can be found in:
 [http://github.com/fritzsedlazeck/Sniffles/wiki/Output](http://github.com/fritzsedlazeck/Sniffles/wiki/Output)
 
-
-Finally, you can convert the VCF to a tab format:
+**Hint**: you can convert the VCF to a tab format:
 
 ```
-scripts/vcf2tab.py variant_calling/child.nanopore.ROI.vcf
+/mnt/albasj/scripts/vcf2tab.py variant_calling/child.nanopore.ROI.s1.vcf > variant_calling/child.nanopore.ROI.s1.tab
 ```
 
 and inspect the SVs in IGV.
