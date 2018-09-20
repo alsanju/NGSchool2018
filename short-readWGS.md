@@ -10,15 +10,21 @@ Canonical SVs were called from WGS data. Details:
 | Inversion          | X     | 18074005 | 18532312 | Manta          |
 | Duplication 2      | X     | 18248826 | 18532221 | Canvas         |
 
-To first visualise the short-read sequencing for the child and the two unaffected parents, open in IGV the bam files that are in:
+First, we will visualise the short-read sequencing data for the child and the two unaffected parents. Open IGV:
 
 ```
-data/illumina/child.chrX.bam
-data/illumina/father.chrX.bam
-data/illumina/mother.chrX.bam
+igv&
 ```
 
-And go to region:
+And open the following bam files (**Hint**: File > Load from file):
+
+```
+/mnt/albasj/data/illumina/child.chrX.bam
+/mnt/albasj/data/illumina/father.chrX.bam
+/mnt/albasj/data/illumina/mother.chrX.bam
+```
+
+Go to region:
 chrX:17,699,000-18,653,000	
 
 If you have problems visualising this region you can change the visibility range threshold to 1000 Kb in View>Preferences>Alignments.
@@ -26,4 +32,3 @@ If you still have problems, go to individual breakpoints and zoom out.
 
 - How is this variant inherited?
 - Can you phase the cxSV from the short reads? Some informative SNPs are chrX:18064030, chrX:18073775, chrX:18504017.
-
