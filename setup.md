@@ -8,7 +8,7 @@ Login to remote server:
 ssh username@147.228.242.14
 ```
 
-Now we need to configure conda environments. If you have already dowloaded miniconda in a previous workshop, just type:
+You would need to configure conda environments. If you have already dowloaded miniconda in a previous workshop, just type:
 
 ```
 bash
