@@ -81,12 +81,14 @@ read_fast5_basecaller.py -l
 
 So lets basecall
 ```sh
+username=_yourusername_
+
 read_fast5_basecaller.py --flowcell FLO-MIN106 \
  --kit SQK-PCS108 \
  --input reads/ \
  --recursive \
  --worker_threads 4 \
- --save_path /mnt/albasj/analysis/*username*/basecalled_reads/
+ --save_path /mnt/albasj/analysis/${username}/basecalled_reads/
 ```
 
 (**Interesting fact**: You have just started up a Machine Learning script. Albacore, alongside almost all current nanopore basecallers have a neural network at their core) 
@@ -116,7 +118,7 @@ There are two different workflows we recommend based on which sequencer you have
 Lets take a look inside the new **basecalled_reads/** directory we just created
 
 ```sh
-cd /mnt/albasj/analysis/*username*
+cd /mnt/albasj/analysis/${username}
 ls -1 basecalled_reads/
 ```
 
