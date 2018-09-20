@@ -30,5 +30,5 @@ chrX:17,699,000-18,653,000
 If you have problems visualising this region you can change the visibility range threshold to 1000 Kb in View>Preferences>Alignments.
 If you still have problems, go to individual breakpoints and zoom out.
 
-- How is this variant inherited?
+- Which is the mechanism of inheritance of this variant?
 - Can you phase the cxSV from the short reads? Some informative SNPs are chrX:18064030, chrX:18073775, chrX:18504017.
