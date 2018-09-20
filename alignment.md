@@ -1,4 +1,4 @@
-# Contents
+# Alignment
 
 * [Working directory](#wd)
 * [FASTQ](#fastq)
