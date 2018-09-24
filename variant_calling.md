@@ -50,11 +50,3 @@ and open the nanopore bam file (keeping the ones from illumina sequencing):
 ```
 /mnt/albasj/analysis/albasj/alignment/child.nanopore.ROI.sort.bam
 ```
-
-From the short-read WGS we already suspected that the cxSV was present in the paternal chromosome. To confirm this statement, we will inspect the following SNPs:
-
- - ChrX:18,073,775
- - ChrX:18,536,028
-
-Can you now conclude if there is a disrupted and an intact copy of the gene in the same allele? What does this mean?
-
